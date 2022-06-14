@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        Jonathan Li website
+        Jonathan Li website TEST CI
       </header>
     </div>
   );
