@@ -3,28 +3,22 @@
 import React, { useRef } from "react";
 import clsx from "clsx";
 import { useInView } from "framer-motion"
+import { GitHubIcon } from "../icons";
 
-import { GitHubIcon, LinkedInIcon } from "../icons";
-
-const Hero = () => {
+const Projects = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   return (
     <section
-      id="hero"
+      id="projects"
       ref={ref}
       className={clsx(`relative flex h-[90vh] flex-col justify-center items-center transition duration-1000 ease-cubic-bezier(0.17, 0.55, 0.55, 1) ${isInView ? "opacity-100 translate-x-0" : "-translate-x-8 opacity-0"}`)}
     >
-      <h1 className="text-6xl font-bold">Hi, I'm Jonathan</h1>
-      <h2 className="text-lg font-medium">
-        Associate Application Developer at{" "}
-        <a href="https://devtechnology.com/" rel="noreferrer" target="_blank" className="underline dark:underline-dark transition duration-1000 ease-in-out">
-          Dev Technology Group
-        </a>
-      </h2>
+      <h1>Projects</h1>
+      
     </section>
   );
 };
 
-export default Hero;
+export default Projects;

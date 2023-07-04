@@ -1,119 +1,38 @@
 "use client";
 
-import React, { useState } from "react";
-import clsx from "clsx";
-import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import React, { useRef } from "react";
 import { Link } from "react-scroll";
+import { useInView } from "framer-motion"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
-import useDarkMode from "@/util/hooks/useDarkMode";
+import Menu from "./menu";
+import ThemeToggle from "./ThemeToggle";
+import clsx from "clsx";
 
 const Nav = () => {
-  const [darkTheme, setDarkTheme] = useDarkMode();
-  const toggleTheme = () => setDarkTheme(!darkTheme);
-
-  const [isOpen, setIsOpen] = useState(false);
-  const handleToggle = () => setIsOpen(!isOpen);
-
-  const navLink =
-    "text-neutral-500 text-md font-semibold ml-8 cursor-pointer hover:text-neutral-950 dark:hover:text-slate-50 transition ease-in-out duration-700";
-  const hamBar =
-    "bg-neutral-500 block w-6 h-0.5 mx-auto my-1 transition-all ease-in-out duration-300";
-  const hamNavLink =
-    "text-xl text-slate-50 font-bold cursor-pointer hover:text-emerald-200 transition ease-in-out duration-700";
+  const navLinks = ["about", "jobs", "projects"];
+  const navRef = useRef(null);
+  const isInView = useInView(navRef, { once: true });
 
   return (
-    <nav className="px-20 py-10">
-      <div className="flex justify-between items-center">
-        <div className="text-3xl text-neutral-500 font-bold hover:text-emerald-700 dark:hover:text-slate-50 transition ease-in-out duration-700">
-          <Link href="/">J.Li</Link>
+    <nav ref={navRef} className={clsx(`relative z-50 px-10 pt-10 transition duration-700 ease-in-out ${isInView ? "opacity-100 translate-y-0" : "-translate-y-10 opacity-0"}`)}>
+      <div className="flex items-center justify-between">
+        <div className="text-3xl font-bold text-neutral-500">
+          J.LI
         </div>
-        {/* desktop nav */}
-        <ul className="hidden md:flex justify-between items-center">
-          <li className={navLink}>
-            <Link to="section1" smooth={true} duration={500}>
-              about
-            </Link>
-          </li>
-          <li className={navLink}>
-            <Link to="section2" smooth={true} duration={500}>
-              experience
-            </Link>
-          </li>
-          <li className={navLink}>
-            <Link to="section3" smooth={true} duration={500}>
-              projects
-            </Link>
-          </li>
-          <button
-            className={clsx(
-              navLink +
-                " border-2 border-neutral-400 dark:border-neutral-500 py-1 px-2 rounded-md hover:bg-neutral-500 hover:border-neutral-500 hover:text-slate-50 dark:hover:bg-emerald-600 dark:hover:border-emerald-600 dark:hover:text-neutral-100"
-            )}
-          >
+        <ul className="hidden items-center justify-between md:flex">
+          {navLinks.map((name, idx) => (
+            <li key={idx} className="ml-8 cursor-pointer font-semibold text-neutral-500 transition duration-700 ease-in-out hover:text-neutral-950 dark:hover:text-neutral-50">
+              <Link to={name} smooth={true} duration={500}>
+                {name}
+              </Link>
+            </li>
+          ))}
+          <button className="ml-8 cursor-pointer rounded-md border-2 border-neutral-400 px-2 py-1 font-semibold text-neutral-500 transition duration-700 ease-in-out hover:border-emerald-700 hover:bg-emerald-700 hover:text-slate-50 dark:border-neutral-500 dark:hover:border-emerald-600 dark:hover:bg-emerald-600 dark:hover:text-neutral-100">
             resume
           </button>
-          <li onClick={toggleTheme}>
-            {darkTheme ? (
-              <FontAwesomeIcon
-                icon={faSun}
-                size="lg"
-                className="text-neutral-500 w-5 ml-8 cursor-pointer dark:hover:text-slate-50 transition ease-in-out duration-700"
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faMoon}
-                size="lg"
-                className="text-neutral-500 w-5 ml-8 cursor-pointer hover:text-slate-950 transition ease-in-out duration-700"
-              />
-            )}
-          </li>
+          <ThemeToggle styles="ml-8" />
         </ul>
-        {/* mobile nav */}
-        <div
-          className="block md:hidden z-20 cursor-pointer"
-          onClick={handleToggle}
-        >
-          <span
-            className={clsx(
-              `${hamBar} ${isOpen && "bg-slate-50 translate-y-1.5 rotate-45"}`
-            )}
-          />
-          <span className={clsx(`${hamBar} ${isOpen && "opacity-0"}`)} />
-          <span
-            className={clsx(
-              `${hamBar} ${isOpen && "bg-slate-50 -translate-y-1.5 -rotate-45"}`
-            )}
-          />
-        </div>
-        <AnimatePresence>
-          {isOpen && (
-            <motion.ul
-              className="absolute md:hidden z-5 bg-emerald-700 w-screen top-0 left-0 flex flex-col justify-center items-center p-20 gap-10"
-              initial={{ y: -500 }}
-              animate={{ y: 0 }}
-              exit={{ y: -500 }}
-              transition={{ duration: 0.4 }}
-            >
-              <li className={hamNavLink}>about</li>
-              <li className={hamNavLink}>experience</li>
-              <li className={hamNavLink}>projects</li>
-              <button
-                className={clsx(
-                  hamNavLink +
-                    " border-2 border-slate-50 py-1 px-2 rounded-md hover:text-emerald-700 hover:bg-slate-50"
-                )}
-              >
-                resume
-              </button>
-              <li onClick={toggleTheme}>
-                {darkTheme ? <p>use light</p> : <p>use dark</p>}
-              </li>
-            </motion.ul>
-          )}
-        </AnimatePresence>
+        <Menu />
       </div>
     </nav>
   );
