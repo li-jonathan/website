@@ -1,56 +1,87 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import clsx from "clsx";
-import { useInView } from "framer-motion";
-
+import React, { useState } from "react";
 import { JobsData } from "@/public/content";
+import { GoToLinkIcon } from "../icons";
+import clsx from "clsx";
 
 const Jobs = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const [activeTab, setActiveTab] = useState(1);
 
   return (
-    <section
-      id="jobs"
-      ref={ref}
-      className={clsx(
-        `ease-cubic-bezier(0.17, 0.55, 0.55, 1) flex flex-col items-center justify-center px-10 md:px-30 lg:px-40 py-10 transition duration-1000 ${
-          isInView ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
-        }`
-      )}
-    >
-      <h1 className="text-4xl font-bold mb-10">Experience</h1>
-      <ol class="relative border-l border-neutral-400">
-        {JobsData.map((job, idx) => (
-          <li key={idx} class="mb-10 ml-4">
-            <div class="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-neutral-50 dark:border-neutral-300 bg-emerald-700"></div>
-            <time class="mb-1 text-sm text-neutral-500 dark:text-neutral-500 leading-none">
-              {job.range}
-            </time>
-            <h3 class="text-lg font-semibold gap-1">
-              {job.title[0]}
-              <span className="ml-2 font-bold text-emerald-700 hover:text-emerald-600 dark:text-emerald-600 dark:hover:text-emerald-500 "><a href={job.url} rel="noreferrer" target="_blank">{` // ${job.company}`}</a></span>
-            </h3>
-            {job.title[1] && (
-              <h3 class="text-lg font-semibold gap-1">
-                {job.title[1]}
-              </h3>
+    <section id="jobs" className="px-12 py-36">
+      <h1 className="mb-10 text-4xl font-bold text-emerald-400">/experience</h1>
+      <div className="flex min-h-[400px] max-w-3xl justify-center">
+        <div className="relative flex min-w-max flex-col">
+          {JobsData.map((job, index) => (
+            <button
+              className={clsx(
+                `h-10 border-r-2 border-neutral-300 border-opacity-25 px-6 text-left text-sm hover:bg-neutral-200 hover:bg-opacity-10 hover:text-neutral-200 ${
+                  activeTab === index + 1
+                    ? "bg-neutral-200 bg-opacity-20 text-neutral-200"
+                    : "text-neutral-400"
+                } transition-all duration-700 ease-in-out`
+              )}
+              onClick={() => setActiveTab(index + 1)}
+            >
+              {job.companyShort}
+            </button>
+          ))}
+          <span
+            className={clsx(
+              `absolute right-0 z-10 h-10 w-0.5 bg-emerald-400 ${
+                activeTab === 1
+                  ? "-translate-y-0"
+                  : activeTab === 2
+                  ? "translate-y-full"
+                  : activeTab === 3
+                  ? "translate-y-[200%]"
+                  : "translate-y-[300%]"
+              } ease-cubic-bezier transition-transform delay-200 duration-700`
             )}
-            {job.details.map(item => (
-              <p class="mb-4 dark:text-neutral-400">
-                {item}
-              </p>
-            ))}
-            <div className="flex gap-2">
-              {job.techStack.map(tech => (
-                <div className="text-sm bg-emerald-700 text-neutral-200 py-1 px-2 rounded-lg">{tech}</div>
-              ))}
-            </div>
-          </li>
-        ))}
-
-      </ol>
+          ></span>
+        </div>
+        <div className="relative w-full lg:ml-4">
+          {JobsData.map((job, index) => {
+            const {
+              title,
+              company,
+              companyShort,
+              range,
+              url,
+              details,
+              techStack,
+            } = job;
+            return (
+              <div
+                className={clsx(
+                  `${
+                    activeTab === index + 1 ? "block" : "hidden"
+                  } h-auto w-full px-4 py-2`
+                )}
+              >
+                <h2 className="text-xl font-semibold">
+                  {title}
+                  <span className="text-emerald-400">
+                    {" @ "}
+                    <a href={url} target="_blank" rel="noreferrer">{companyShort}</a>
+                  </span>
+                </h2>
+                <p className="mb-6 text-md font-light">{job.range}</p>
+                <ul className="list-none">
+                  {details.map((bullet, index) => (
+                    <li class="flex gap-4 mb-4">
+                      <span class="text-emerald-500 text-lg leading-6">‣</span>
+                      <p className="text-md text-neutral-400">{bullet}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <p className="flex gap-2 items-center">View Resume <span><GoToLinkIcon className="w-4 h-4 fill-neutral-200" /></span></p>
     </section>
   );
 };

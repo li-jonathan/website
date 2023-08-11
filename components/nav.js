@@ -1,39 +1,39 @@
 "use client";
-
-import React, { useRef } from "react";
 import { Link } from "react-scroll";
-import { useInView } from "framer-motion"
-
-import Menu from "./menu";
-import ThemeToggle from "./ThemeToggle";
-import clsx from "clsx";
+import { GitHubIcon, LinkedInIcon, EmailIcon } from "./icons";
 
 const Nav = () => {
-  const navLinks = ["about", "jobs", "projects"];
-  const navRef = useRef(null);
-  const isInView = useInView(navRef, { once: true });
-
+  const navLinks = [
+    { link: "hero", label: "home" },
+    { link: "about", label: "about" },
+    { link: "jobs", label: "experience" },
+    { link: "projects", label: "projects" },
+  ];
   return (
-    <nav ref={navRef} className={clsx(`relative z-50 px-10 pt-10 transition duration-700 ease-in-out ${isInView ? "opacity-100 translate-y-0" : "-translate-y-10 opacity-0"}`)}>
-      <div className="flex items-center justify-between">
-        <div className="text-3xl font-bold text-neutral-500">
-          J.LI
-        </div>
-        <ul className="hidden items-center justify-between md:flex">
-          {navLinks.map((name, idx) => (
-            <li key={idx} className="ml-8 cursor-pointer font-semibold text-neutral-500 transition duration-700 ease-in-out hover:text-neutral-950 dark:hover:text-neutral-50">
-              <Link to={name} smooth={true} duration={500}>
-                {name}
-              </Link>
-            </li>
-          ))}
-          <button className="ml-8 cursor-pointer rounded-md border-2 border-neutral-400 px-2 py-1 font-semibold text-neutral-500 transition duration-700 ease-in-out hover:border-emerald-700 hover:bg-emerald-700 hover:text-slate-50 dark:border-neutral-500 dark:hover:border-emerald-600 dark:hover:bg-emerald-600 dark:hover:text-neutral-100">
-            resume
-          </button>
-          <ThemeToggle styles="ml-8" />
-        </ul>
-        <Menu />
-      </div>
+    <nav className="fixed right-0 p-6 2xl:p-12">
+      <ul className="hidden flex-col gap-1 text-right lg:flex">
+        {navLinks.map((link, idx) => (
+          <li
+            key={idx}
+            className="text-md cursor-pointer font-semibold text-neutral-400"
+          >
+            <Link to={link.link} smooth={true} duration={400}>
+              /{link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <ul className="fixed bottom-0 right-0 flex flex-col gap-4 p-6 lg:p-12 2xl:flex-row">
+        <li>
+          <EmailIcon className="h-6 w-6 fill-neutral-400" />
+        </li>
+        <li>
+          <GitHubIcon className="h-6 w-6 fill-neutral-400" />
+        </li>
+        <li>
+          <LinkedInIcon className="h-6 w-6 fill-neutral-400" />
+        </li>
+      </ul>
     </nav>
   );
 };

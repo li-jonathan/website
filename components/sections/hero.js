@@ -1,28 +1,19 @@
 "use client"
-
-import React, { useRef } from "react";
 import clsx from "clsx";
-import { useInView } from "framer-motion"
-
-import { GitHubIcon, LinkedInIcon } from "../icons";
 
 const Hero = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
   return (
     <section
       id="hero"
-      ref={ref}
-      className={clsx(`relative flex h-[90vh] flex-col justify-center items-center transition duration-1000 ease-cubic-bezier(0.17, 0.55, 0.55, 1) ${isInView ? "opacity-100 translate-x-0" : "-translate-x-8 opacity-0"}`)}
+      className="px-12 py-36 h-screen flex items-center"
     >
-      <h1 className="text-6xl font-bold">Hi, I'm Jonathan</h1>
-      <h2 className="text-lg font-medium">
-        Associate Application Developer at{" "}
-        <a href="https://devtechnology.com/" rel="noreferrer" target="_blank" className="underline dark:underline-dark transition duration-1000 ease-in-out">
-          Dev Technology Group
-        </a>
-      </h2>
+      <div className="max-w-lg">
+        <h1 className="text-7xl font-bold mb-4">Jonathan Li</h1>
+        <p className="text-justify leading-8 mb-6">I'm a frontend developer passionate about bringing dynamic web interfaces to life using modern web technologies. Specializing in creating seamless transitions from the design board to the user. </p>
+        <button className="px-6 py-2 text-emerald-400 border-2 border-emerald-400 rounded-lg font-semibold">
+          Say Hello!
+        </button>
+      </div>
     </section>
   );
 };
