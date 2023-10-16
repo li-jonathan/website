@@ -11,7 +11,7 @@ const Jobs = () => {
   return (
     <section id="jobs" className="px-12 py-36">
       <h1 className="mb-10 text-4xl font-bold text-emerald-400">/experience</h1>
-      <div className="flex min-h-[400px] max-w-3xl justify-center">
+      <div className="flex min-h-[500px] max-w-3xl justify-center">
         <div className="relative flex min-w-max flex-col">
           {JobsData.map((job, index) => (
             <button
@@ -44,7 +44,7 @@ const Jobs = () => {
         <div className="relative w-full lg:ml-4">
           {JobsData.map((job, index) => {
             const {
-              title,
+              titles,
               company,
               companyShort,
               range,
@@ -61,13 +61,18 @@ const Jobs = () => {
                 )}
               >
                 <h2 className="text-xl font-semibold">
-                  {title}
+                  {titles[0]}
                   <span className="text-emerald-400">
                     {" @ "}
                     <a href={url} target="_blank" rel="noreferrer">{companyShort}</a>
                   </span>
                 </h2>
-                <p className="mb-6 text-md font-light">{job.range}</p>
+                {titles.length > 1 && (
+                  titles.slice(1).map(title => (
+                    <h3 className="text-neutral-400">{title}</h3>
+                  ))
+                )}
+                <p className="mb-6 text-md italic text-neutral-400">{job.range}</p>
                 <ul className="list-none">
                   {details.map((bullet, index) => (
                     <li class="flex gap-4 mb-4">

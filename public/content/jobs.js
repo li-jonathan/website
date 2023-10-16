@@ -1,6 +1,6 @@
 const JobsData = [
   {
-    title: "Associate Application Developer",
+    titles: ["Application Developer", "Associate Application Developer", "Technical Associate"],
     company: "Dev Technology Group",
     companyShort: "Dev Tech Group",
     range: "June 2021 - Present",
@@ -13,7 +13,7 @@ const JobsData = [
     techStack: ["React", "JavaScript", "HTML", "CSS", "SCSS"],
   },
   {
-    title: "Software Engineer Intern",
+    titles: ["Software Engineer Intern"],
     company: "Fortitude Technologies",
     companyShort: "Fortitude",
     range: "Summer 2020",
@@ -25,7 +25,7 @@ const JobsData = [
     techStack: ["Python", "AWS"],
   },
   {
-    title: "Python Developer Research Assistant",
+    titles: ["Python Developer Research Assistant"],
     company: "JMU Wearable Computing Group",
     companyShort: "JMU",
     range: "Jan 2020 - April 2021",
@@ -37,7 +37,7 @@ const JobsData = [
     techStack: ["Python"],
   },
   {
-    title: "Database Developer Intern",
+    titles: ["Database Developer Intern"],
     company: "MagicQuote",
     companyShort: "MagicQuote",
     range: "Summer 2018",

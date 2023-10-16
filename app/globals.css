@@ -42,11 +42,11 @@
   }
 
   .underline-dark:hover {
-    color: #059669;
+    color: #10b981;
   }
 
   .underline:hover {
-    color: #059669;
+    color: #10b981;
   }
   
   .underline:hover::after {
