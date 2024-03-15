@@ -1,6 +1,10 @@
 const JobsData = [
   {
-    titles: ["Application Developer", "Associate Application Developer", "Technical Associate"],
+    titles: [
+      "Application Developer",
+      "Associate Application Developer",
+      "Technical Associate",
+    ],
     company: "Dev Technology Group",
     companyShort: "Dev Tech Group",
     range: "June 2021 - Present",
@@ -25,7 +29,7 @@ const JobsData = [
     techStack: ["Python", "AWS"],
   },
   {
-    titles: ["Python Developer Research Assistant"],
+    titles: ["Python Developer"],
     company: "JMU Wearable Computing Group",
     companyShort: "JMU",
     range: "Jan 2020 - April 2021",

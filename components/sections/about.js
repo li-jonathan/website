@@ -1,38 +1,36 @@
-"use client";
+import SectionWrapper from "./SectionWrapper";
 
 const About = () => {
   return (
-    <section id="about" className="h-screen px-12 py-36">
-      <h1 className="mb-10 text-4xl font-bold text-emerald-400">/about</h1>
+    <SectionWrapper id="about" title="about">
       <div className="max-w-xl">
         <p className="mb-4 leading-7">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. ex ea
-          commodo consequat.
+          Hi, my name is Jonathan. I'm a frontend developer based in Chicago,
+          IL.
         </p>
         <p className="mb-4 leading-7">
-          Currently, I'm an Associate Application Developer at{" "}
-          <span className="text-emerald-400">Dev Technology Group</span>,
-          responsible for the frontend of a web application that modernizes a
-          traditional paper-based document system, emphasizing an enhanced user
-          experience.
-        </p>
-        <p className="mb-4 leading-7">
-          Outside of coding, I love learning new recipes, playing any FPS video
-          game, going to the gym, and currently I'm training for my first half
-          marathon!
+          Currently, I'm an Frontend Application Developer at{" "}
+          <span className="text-yellow-400">Dev Technology Group</span>. My
+          responsibilities include building new features and maintenance of a
+          web application designed to modernize a previously paper-based
+          document system, emphasizing an enhanced user experience and more
+          efficient workflow.
         </p>
         <p className="mb-2">
           Here are some technologies I have been working with:
         </p>
-        {["React", "Redux", "TypeScript", "GraphQL"].map((tech, index) => (
-          <li class="mb-1 flex gap-2">
-            <span class="text-lg leading-6 text-emerald-500">‣</span>
-            <p className="text-md text-neutral-400">{tech}</p>
-          </li>
-        ))}
+        <div className="grid grid-flow-col grid-rows-3 gap-2">
+          {["React", "Redux (RTK)", "TypeScript", "GraphQL", "NextJS"].map(
+            (tech, index) => (
+              <div key={`tech-${index}`} className="flex gap-2">
+                <span class="text-lg leading-6 text-yellow-500">‣</span>
+                <p className="text-md text-neutral-400">{tech}</p>
+              </div>
+            )
+          )}
+        </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 };
 

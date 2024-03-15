@@ -1,55 +1,58 @@
-"use client"
+"use client";
 
 import React from "react";
 import Image from "next/image";
 
 import { ProjectsData } from "@/public/content";
-import spotifyScreenshot from "../../public/screenshots/spotify.png";
-import healthTrackerScreenshot from "../../public/screenshots/healthtracker.png";
-
 import { GitHubIcon, GoToLinkIcon } from "../icons";
-
+import SectionWrapper from "./SectionWrapper";
 
 const Projects = () => {
-  const screenshots = {
-    spotify: spotifyScreenshot,
-    healthTracker: healthTrackerScreenshot,
-  }
   return (
-    <section
-      id="projects"
-      className="px-12 py-36"
-    >
-      <h1 className="mb-10 text-4xl font-bold text-emerald-400">/projects</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {ProjectsData.map((project, index) => (
-          <div className="mb-6">
-            <div className="relative bg-emerald-400 border-4 border-emerald-400 rounded-md">
-              <div className="opacity-0 hover:opacity-100 w-full h-full bg-emerald-400 bg-opacity-60 z-20 absolute top-0 left-0 flex justify-center items-center p-8 transition-all ease-in-out duration-700 text-neutral-900">
-                <ul className="flex lg:flex-row flex-col gap-4 hover:cursor-pointer">
-                  <li>
-                    <GitHubIcon className="w-8 h-8 fill-neutral-200"/>
-                  </li>
-                  {project.url && <li>
-                    <GoToLinkIcon className="w-8 h-8 fill-neutral-200" />
-                  </li>}
-                </ul>
-              </div>
-              <Image src={screenshots[project.image]} width={1280} height={720} alt={`Screenshot for ${project.title}`} className="rounded-md"/>
-            </div>
-            <div className="p-2 flex flex-col">
-              <h3 className="font-semibold text-2xl mb-2">{project.title}</h3>
-              <p className="text-justify">{project.details}</p>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {project.techStack.map((tech, index) => (
-                <p className="text-sm bg-neutral-500 bg-opacity-50 rounded-2xl px-3 py-1">{tech}</p>
+    <SectionWrapper id="projects" title="projects">
+      <div className="flex items-center">
+        <div className="flex gap-4 rounded-md bg-neutral-200 bg-opacity-10 p-4">
+          <Image
+            src="/images/google.png"
+            width={256}
+            height={144}
+            className="aspect-video max-h-36 rounded-md"
+          />
+          <div className="flex flex-col justify-center gap-2">
+            <p className="text-xl font-semibold text-yellow-400">
+              Spotify Profile
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu
+              cursus vitae congue mauris rhoncus aenean vel elit
+            </p>
+            <ul className="flex flex-wrap gap-2">
+              {["React", "Redux", "Tailwind"].map((tech, index) => (
+                <li
+                  key={`${tech}-${index}`}
+                  className="rounded-2xl bg-neutral-500 bg-opacity-50 px-3 py-1 text-xs font-medium"
+                >
+                  {tech}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
-        ))}
+          <div className="flex flex-col justify-start gap-4">
+            <a
+              href="https://github.com/li-jonathan"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <GitHubIcon className="h-6 fill-yellow-400 hover:fill-yellow-300" />
+            </a>
+            <a href="https://google.com" target="_blank" rel="noreferrer">
+              <GoToLinkIcon className="h-6 fill-yellow-400 hover:fill-yellow-300" />
+            </a>
+          </div>
+        </div>
       </div>
-    </section>
+    </SectionWrapper>
   );
 };
 
