@@ -8,7 +8,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "jonathan.exe",
+  title: "Jonathan Li",
   description: "Personal website for Jonathan Li - v1",
 };
 

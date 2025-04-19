@@ -38,10 +38,11 @@ export default function Home() {
 
   return (
     <div className="h-screen flex flex-col justify-center items-center gap-8 p-8">
-      <div className="w-full md:w-1/2">
+      <p className="text-yellow-500 text-5xl font-bold font-mono">WIP</p>
+      {/* <div className="w-full md:w-1/2">
         <Terminal onCommand={handleCommand} />
-      </div>
-      <div className="w-full md:w-1/2 h-1/2">{renderSection()}</div>
+      </div> */}
+      {/* <div className="w-full md:w-1/2 h-1/2">{renderSection()}</div> */}
     </div>
   );
 }
