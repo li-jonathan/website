@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from 'next/font/google'
+import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
+const robotoMono = Roboto_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "Jonathan Li",
-  description: "Personal website for Jonathan Li - v1",
+  description: "Jonathan Li's personal website. Frontend Developer.",
 };
 
 export default function RootLayout({
@@ -19,10 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} antialiased bg-gray-200 text-gray-700`}
-      >
-        {children}
+      <body className={`${robotoMono.className} antialiased bg-slate-800 text-slate-100`}>
+          <div className="grid grid-cols-[1fr_min(100%,70ch)_1fr]">
+            {children}
+          </div>
       </body>
     </html>
   );
